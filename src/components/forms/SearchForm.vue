@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import words from "../../data/word.js";
+import otherWords from "../../data/word.js";
 
 export default {
   components: {},
 
   data() {
     return {
-     // words:['hello', 'goodbye', 'helol'],
+      words:['hello', 'goodbye', 'helol'],
       finalList: [],
       wordArray: [],
       searchWord: {
@@ -41,6 +41,7 @@ export default {
 
   mounted() {
    // this.getWords();
+   console.log(otherWords);
   },
   methods: {
     submitForm() {
@@ -69,9 +70,9 @@ export default {
     },
     processList(charNumber) {
       this.wordArray=[];
-      for (var x in words) {
-        if (charNumber == words[x].length) {
-          this.wordArray.push(words[x]);
+      for (var x in this.words) {
+        if (charNumber == this.words[x].length) {
+          this.wordArray.push(this.words[x]);
           console.log("test 2")
         }
       }

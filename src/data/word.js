@@ -1,4 +1,4 @@
-import array from "./words"
+
 
 array = ["A",
 "A's",
