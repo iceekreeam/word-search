@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import otherWords from "../../data/word.js";
+//import otherWords from "../../data/word.js";
 
 export default {
   components: {},
@@ -41,7 +41,7 @@ export default {
 
   mounted() {
    // this.getWords();
-   console.log(otherWords);
+   //console.log(otherWords);
   },
   methods: {
     submitForm() {
