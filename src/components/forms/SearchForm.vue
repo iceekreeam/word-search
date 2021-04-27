@@ -18,17 +18,22 @@
       </div>
     </div>
   </form>
+  <div>
+    <word-list v-if="finalList != null" :words="finalList"></word-list>
+    <p v-if="notFound == true" style="text-align: center">Unfortunately this word and its permutaions are not in our records. <br/> Please try another word! </p>
+  </div>
 </template>
 
 <script>
-import words from "../../data/words.js";
+import words from "../../data/word.js";
+import WordList from "../layout/WordList.vue";
 
 export default {
-  components: {},
+  components: { WordList },
 
   data() {
     return {
-      //words:['hello', 'goodbye', 'helol'],
+      notFound: false,
       finalList: [],
       wordArray: [],
       searchWord: {
@@ -37,42 +42,21 @@ export default {
     };
   },
 
-  mounted() {
-    // this.getWords();
-  },
+ 
   methods: {
     submitForm() {
       let wordLength = this.searchWord.val.length;
-      console.log("test 1");
       this.processList(wordLength);
     },
-    // getFinalList() {
-    //   this.finalList =[];
-    //   let array = this.searchWord.val.split("");
-    //   console.log(array)
-    //   for (var x in array) {
-    //     console.log(this.wordArray);
-    //     for (var y in this.wordArray) {
-    //       if (this.wordArray[y].includes(array[x])) {
-    //         if (!this.finalList.includes(this.wordArray[y])) {
-    //           this.finalList.push(this.wordArray[y]);
-    //           console.log("finalList")
-    //           console.log(this.finalList)
-    //         }
-    //       } else if (!this.wordArray[y].includes(array[x])) {
-    //         break;
-    //       }
-    //     }
-    //   }
-    // },
+
     checker(arr, target) {
-      //let x = target.every((v) => arr.includes(v));
-      return arr.every((z) => target.includes(z));
-      // if (x === y) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
+      let y = target.every((v) => arr.includes(v));
+      let x = arr.every((z) => target.includes(z));
+      if (x && y == true) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     getFinalList() {
@@ -80,15 +64,15 @@ export default {
       let array = this.searchWord.val.toLowerCase().split("");
       for (var x in this.wordArray) {
         let newWordArray = this.wordArray[x].toLowerCase().split("");
-
-        //console.log(this.checker(array, newWordArray));
-
-        if (this.checker(array, newWordArray)) {
+        if (this.checker(array, newWordArray)) {    
           this.finalList.push(this.wordArray[x]);
         }
       }
-      console.log("finalList");
-      console.log(this.finalList);
+      if(this.finalList.length> 0){
+      this.notFound = false;
+      }else{
+        this.notFound = true;
+      }
     },
 
     processList(charNumber) {
@@ -96,7 +80,7 @@ export default {
       for (var x in words) {
         if (charNumber == words[x].length) {
           this.wordArray.push(words[x]);
-          console.log("test 2");
+          
         }
       }
       this.getFinalList();
