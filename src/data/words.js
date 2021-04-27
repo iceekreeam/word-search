@@ -1,4 +1,4 @@
-array = ["A",
+const words = ["A",
 "A's",
 "AA's",
 "AB's",
@@ -99154,4 +99154,4 @@ array = ["A",
 "étude",
 "étude's",
 "études"]
-export default array;
+export default words;
