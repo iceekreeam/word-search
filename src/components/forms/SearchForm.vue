@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import words from "../../data/word.js";
+import words from "../../data/words.js";
 import WordList from "../layout/WordList.vue";
 
 export default {
